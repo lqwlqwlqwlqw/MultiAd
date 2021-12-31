@@ -45,8 +45,7 @@ class BannerActivity : AppCompatActivity() {
 
         val ratioMapBanner = linkedMapOf(
                 AdProviderType.GDT.type to 1,
-                AdProviderType.CSJ.type to 1,
-                AdProviderType.BAIDU.type to 1
+                AdProviderType.CSJ.type to 1
         )
 
         //设置 穿山甲 Banner 刷新间隔时间ms，可以不设置，默认为 30 * 1000 ms

@@ -80,7 +80,7 @@ class AdHelperHybridSplash(
             AdProviderType.GDT.type -> {
                 realLoadOnlySplash(ratioMap, adProviderType)
             }
-            AdProviderType.BAIDU.type, AdProviderType.CSJ.type -> {
+            AdProviderType.CSJ.type -> {
                 realLoadOnlyNative(ratioMap, adProviderType)
             }
         }

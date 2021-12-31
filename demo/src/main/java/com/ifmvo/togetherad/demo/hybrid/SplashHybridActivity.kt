@@ -32,8 +32,7 @@ class SplashHybridActivity : AppCompatActivity() {
          */
         val ratioMapSplash = mapOf(
                 AdProviderType.GDT.type to 1,
-                AdProviderType.CSJ.type to 1,
-                AdProviderType.BAIDU.type to 1
+                AdProviderType.CSJ.type to 1
         )
         /**
          * activity: 必传。这里不是 Context，因为广点通必须传 Activity，所以统一传 Activity。
