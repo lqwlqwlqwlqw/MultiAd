@@ -75,6 +75,7 @@ abstract class CsjProviderNativeExpress : CsjProviderNative() {
     override fun destroyNativeExpressAd(adObject: Any) {
         if (adObject !is TTNativeExpressAd) return
         adObject.destroy()
+        adObject.expressAdView?.removeCallbacks(null)
     }
 
     override fun nativeExpressAdIsBelongTheProvider(adObject: Any): Boolean {

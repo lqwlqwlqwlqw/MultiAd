@@ -72,6 +72,7 @@ abstract class GdtProviderNativeExpress : GdtProviderNative() {
     override fun destroyNativeExpressAd(adObject: Any) {
         if (adObject !is NativeExpressADView) return
         adObject.destroy()
+        adObject.removeCallbacks(null)
     }
 
     override fun nativeExpressAdIsBelongTheProvider(adObject: Any): Boolean {
