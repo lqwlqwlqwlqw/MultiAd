@@ -7,6 +7,7 @@ import com.bytedance.sdk.openadsdk.TTAdDislike
 import com.bytedance.sdk.openadsdk.TTAdNative
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd
 import com.ifmvo.togetherad.core.listener.NativeExpressListener
+import com.ifmvo.togetherad.core.utils.logv
 import com.ifmvo.togetherad.csj.TogetherAdCsj
 
 
@@ -29,6 +30,11 @@ abstract class CsjProviderNativeExpress : CsjProviderNative() {
 
         TogetherAdCsj.mTTAdManager.createAdNative(activity).loadNativeExpressAd(adSlot, object : TTAdNative.NativeExpressAdListener {
             override fun onNativeExpressAdLoad(ads: MutableList<TTNativeExpressAd>?) {
+                if (activity.isFinishing || activity.isDestroyed) {
+                    "宿主Activity已销毁".logv()
+                    return
+                }
+
                 if (ads.isNullOrEmpty()) {
                     callbackNativeExpressFailed(adProviderType, alias, listener, null, "请求成功，但是返回的list为空")
                     return
@@ -37,24 +43,44 @@ abstract class CsjProviderNativeExpress : CsjProviderNative() {
                 ads.forEach { adObject ->
                     adObject.setExpressInteractionListener(object : TTNativeExpressAd.ExpressAdInteractionListener {
                         override fun onAdClicked(view: View?, type: Int) {
+                            if (activity.isFinishing || activity.isDestroyed) {
+                                "宿主Activity已销毁".logv()
+                                return
+                            }
                             listener.onAdClicked(adProviderType, adObject)
                         }
 
                         override fun onAdShow(view: View?, type: Int) {
+                            if (activity.isFinishing || activity.isDestroyed) {
+                                "宿主Activity已销毁".logv()
+                                return
+                            }
                             listener.onAdShow(adProviderType, adObject)
                         }
 
                         override fun onRenderSuccess(view: View?, width: Float, height: Float) {
+                            if (activity.isFinishing || activity.isDestroyed) {
+                                "宿主Activity已销毁".logv()
+                                return
+                            }
                             listener.onAdRenderSuccess(adProviderType, adObject)
                         }
 
                         override fun onRenderFail(view: View?, errorMsg: String?, errorCode: Int) {
+                            if (activity.isFinishing || activity.isDestroyed) {
+                                "宿主Activity已销毁".logv()
+                                return
+                            }
                             listener.onAdRenderFail(adProviderType, adObject)
                         }
                     })
 
                     adObject.setDislikeCallback(activity, object : TTAdDislike.DislikeInteractionCallback {
                         override fun onSelected(position: Int, value: String?, enforce: Boolean) {
+                            if (activity.isFinishing || activity.isDestroyed) {
+                                "宿主Activity已销毁".logv()
+                                return
+                            }
                             listener.onAdClosed(adProviderType, adObject)
                         }
 
