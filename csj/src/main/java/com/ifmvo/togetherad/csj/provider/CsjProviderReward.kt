@@ -1,6 +1,7 @@
 package com.ifmvo.togetherad.csj.provider
 
 import android.app.Activity
+import android.os.Bundle
 import com.bytedance.sdk.openadsdk.*
 import com.ifmvo.togetherad.core.listener.RewardListener
 import com.ifmvo.togetherad.core.utils.logd
@@ -87,6 +88,10 @@ abstract class CsjProviderReward : CsjProviderNativeExpress() {
                         CsjProvider.Reward.errorCode = errorCode
                         CsjProvider.Reward.errorMsg = errorMsg
                         callbackRewardVerify(adProviderType, listener)
+                    }
+
+                    override fun onRewardArrived(p0: Boolean, p1: Int, p2: Bundle?) {
+                        TODO("Not yet implemented")
                     }
                 }
 
@@ -202,6 +207,10 @@ abstract class CsjProviderReward : CsjProviderNativeExpress() {
                         CsjProvider.Reward.errorCode = errorCode
                         CsjProvider.Reward.errorMsg = errorMsg
                         callbackRewardVerify(adProviderType, listener)
+                    }
+
+                    override fun onRewardArrived(p0: Boolean, p1: Int, p2: Bundle?) {
+                        TODO("Not yet implemented")
                     }
                 }
 
