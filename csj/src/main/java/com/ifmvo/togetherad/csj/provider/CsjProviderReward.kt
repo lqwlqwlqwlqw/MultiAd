@@ -87,7 +87,7 @@ abstract class CsjProviderReward : CsjProviderNativeExpress() {
                         CsjProvider.Reward.rewardName = rewardName
                         CsjProvider.Reward.errorCode = errorCode
                         CsjProvider.Reward.errorMsg = errorMsg
-                        callbackRewardVerify(adProviderType, listener)
+//                         callbackRewardVerify(adProviderType, listener)
                     }
 
                     override fun onRewardArrived(p0: Boolean, p1: Int, p2: Bundle?) {
@@ -209,7 +209,7 @@ abstract class CsjProviderReward : CsjProviderNativeExpress() {
                         CsjProvider.Reward.rewardName = rewardName
                         CsjProvider.Reward.errorCode = errorCode
                         CsjProvider.Reward.errorMsg = errorMsg
-                        callbackRewardVerify(adProviderType, listener)
+//                         callbackRewardVerify(adProviderType, listener)
                     }
 
                     override fun onRewardArrived(p0: Boolean, p1: Int, p2: Bundle?) {
