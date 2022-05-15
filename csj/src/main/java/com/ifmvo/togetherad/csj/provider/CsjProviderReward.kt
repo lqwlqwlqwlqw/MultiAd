@@ -91,7 +91,10 @@ abstract class CsjProviderReward : CsjProviderNativeExpress() {
                     }
 
                     override fun onRewardArrived(p0: Boolean, p1: Int, p2: Bundle?) {
-                        TODO("Not yet implemented")
+//                        TODO("Not yet implemented")
+                        CsjProvider.Reward.rewardVerify = p0
+                        CsjProvider.Reward.rewardAmount = p1
+                        callbackRewardVerify(adProviderType, listener)
                     }
                 }
 
@@ -210,7 +213,10 @@ abstract class CsjProviderReward : CsjProviderNativeExpress() {
                     }
 
                     override fun onRewardArrived(p0: Boolean, p1: Int, p2: Bundle?) {
-                        TODO("Not yet implemented")
+//                        TODO("Not yet implemented")
+                        CsjProvider.Reward.rewardVerify = p0
+                        CsjProvider.Reward.rewardAmount = p1
+                        callbackRewardVerify(adProviderType, listener)
                     }
                 }
 
