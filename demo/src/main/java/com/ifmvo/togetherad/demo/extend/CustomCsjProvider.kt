@@ -47,44 +47,45 @@ class CustomCsjProvider : CsjProvider() {
                 .setImageAcceptedSize(Banner.imageAcceptedSizeWidth, Banner.imageAcceptedSizeHeight)
                 .build()
 
-        TogetherAdCsj.mTTAdManager.createAdNative(activity).loadBannerAd(adSlot, object : TTAdNative.BannerAdListener {
-            override fun onBannerAdLoad(bannerAd: TTBannerAd?) {
-                if (bannerAd == null) {
+        TogetherAdCsj.mTTAdManager.createAdNative(activity).loadBannerExpressAd(adSlot, object : TTAdNative.NativeExpressAdListener {
+            override fun onNativeExpressAdLoad(bannerAdList: MutableList<TTNativeExpressAd>?) {
+                if (bannerAdList.isNullOrEmpty()) {
                     callbackBannerFailed(adProviderType, alias, listener, null, "请求成功，但是返回的 bannerAd 为空")
                     return
                 }
 
-                val bannerView = bannerAd.bannerView
-                if (bannerView == null) {
-                    callbackBannerFailed(adProviderType, alias, listener, null, "请求成功，但是返回的 bannerView 为空")
-                    return
-                }
-
-                callbackBannerLoaded(adProviderType, alias, listener)
-
-                bannerAd.setSlideIntervalTime(Banner.slideIntervalTime)
-                container.removeAllViews()
-                container.addView(bannerView)
-
-                bannerAd.setBannerInteractionListener(object : TTBannerAd.AdInteractionListener {
-                    override fun onAdClicked(view: View?, type: Int) {
-                        callbackBannerClicked(adProviderType, listener)
-                    }
-
-                    override fun onAdShow(view: View?, type: Int) {
-                        callbackBannerExpose(adProviderType, listener)
-                    }
-                })
-
-                bannerAd.setShowDislikeIcon(object : TTAdDislike.DislikeInteractionCallback {
-                    override fun onSelected(position: Int, value: String?, enforce: Boolean) {
-                        container.removeAllViews()
-                        callbackBannerClosed(adProviderType, listener)
-                    }
-
-                    override fun onCancel() {}
-                    override fun onShow() {}
-                })
+//                var bannerAd: TTNativeExpressAd? = bannerAdList[0]
+//                val bannerView = bannerAd.expressAdView
+//                if (bannerView == null) {
+//                    callbackBannerFailed(adProviderType, alias, listener, null, "请求成功，但是返回的 bannerView 为空")
+//                    return
+//                }
+//
+//                callbackBannerLoaded(adProviderType, alias, listener)
+//
+//                bannerAd.setSlideIntervalTime(Banner.slideIntervalTime)
+//                container.removeAllViews()
+//                container.addView(bannerView)
+//
+//                bannerAd.setBannerInteractionListener(object : TTBannerAd.AdInteractionListener {
+//                    override fun onAdClicked(view: View?, type: Int) {
+//                        callbackBannerClicked(adProviderType, listener)
+//                    }
+//
+//                    override fun onAdShow(view: View?, type: Int) {
+//                        callbackBannerExpose(adProviderType, listener)
+//                    }
+//                })
+//
+//                bannerAd.setShowDislikeIcon(object : TTAdDislike.DislikeInteractionCallback {
+//                    override fun onSelected(position: Int, value: String?, enforce: Boolean) {
+//                        container.removeAllViews()
+//                        callbackBannerClosed(adProviderType, listener)
+//                    }
+//
+//                    override fun onCancel() {}
+//                    override fun onShow() {}
+//                })
             }
 
             override fun onError(errorCode: Int, errorMsg: String?) {
