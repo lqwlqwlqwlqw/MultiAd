@@ -48,6 +48,7 @@ abstract class CsjProviderNative : CsjProviderInter() {
                 .setCodeId(TogetherAdCsj.idMapCsj[alias])
                 .setSupportDeepLink(CsjProvider.Native.supportDeepLink)
                 .setImageAcceptedSize(CsjProvider.Native.imageAcceptedSizeWidth, CsjProvider.Native.imageAcceptedSizeHeight)
+                .setExpressViewAcceptedSize(CsjProvider.NativeExpress.expressViewAcceptedSizeWidth, CsjProvider.NativeExpress.expressViewAcceptedSizeHeight)
                 .setNativeAdType(CsjProvider.Native.nativeAdType)
                 .setAdCount(maxCount)
                 .build()
@@ -75,6 +76,7 @@ abstract class CsjProviderNative : CsjProviderInter() {
 //                .setDownloadType(TogetherAdCsj.downloadType)
                 .setCodeId(TogetherAdCsj.idMapCsj[alias])
                 .setImageAcceptedSize(CsjProvider.Native.imageAcceptedSizeWidth, CsjProvider.Native.imageAcceptedSizeHeight)
+                .setExpressViewAcceptedSize(CsjProvider.NativeExpress.expressViewAcceptedSizeWidth, CsjProvider.NativeExpress.expressViewAcceptedSizeHeight)
                 .setAdCount(maxCount)
                 .build()
 
