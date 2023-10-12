@@ -1,3 +1,25 @@
+pluginManagement {
+    buildscript {
+        repositories {
+            mavenCentral()
+            maven {
+                // r8 maven
+                url = uri("https://storage.googleapis.com/r8-releases/raw")
+            }
+        }
+        dependencies {
+            // r8 version
+            classpath("com.android.tools:r8:8.2.16-dev")
+        }
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+
 include ':core'
 include ':gdt'
 include ':csj'
