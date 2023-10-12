@@ -12,19 +12,19 @@ buildscript {
         classpath 'com.android.tools.build:gradle:7.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.kezong:fat-aar:1.2.12'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        mavenCentral()
-        maven { url "https://mirrors.tencent.com/repository/maven/thirdparty" }
-        maven { url 'https://jitpack.io' }
-    }
-}
+//allprojects {
+//    repositories {
+//        google()
+//        jcenter()
+//        mavenCentral()
+//        maven { url "https://mirrors.tencent.com/repository/maven/thirdparty" }
+//        maven { url 'https://jitpack.io' }
+//    }
+//}
 
 task clean(type: Delete) {
     delete rootProject.buildDir

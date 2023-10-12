@@ -1,9 +1,14 @@
+plugins {
+    // 1、增加 maven-publish
+    id 'maven-publish'
+}
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.kezong.fat-aar'
 
 // JitPack Maven
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 // Your Group
 group = 'com.github.lqw'
 
@@ -26,7 +31,7 @@ android {
         }
     }
 
-    repositories { flatDir { dirs 'libs' } }
+//    repositories { flatDir { dirs 'libs' } }
 
 }
 
