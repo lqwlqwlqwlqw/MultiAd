@@ -25,7 +25,7 @@ open class ActLifecycleAppBase : Application() {
 
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
 
-            override fun onActivityStarted(activity: Activity?) {
+            override fun onActivityStarted(activity: Activity) {
 
                 activity ?: return
 
@@ -38,7 +38,7 @@ open class ActLifecycleAppBase : Application() {
                 mActivityCount.getAndAdd(1)
             }
 
-            override fun onActivityStopped(activity: Activity?) {
+            override fun onActivityStopped(activity: Activity) {
 
                 activity ?: return
 
@@ -51,11 +51,11 @@ open class ActLifecycleAppBase : Application() {
                 }
             }
 
-            override fun onActivityPaused(activity: Activity?) {}
-            override fun onActivityResumed(activity: Activity?) {}
-            override fun onActivityDestroyed(activity: Activity?) {}
-            override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {}
-            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {}
+            override fun onActivityPaused(activity: Activity) {}
+            override fun onActivityResumed(activity: Activity) {}
+            override fun onActivityDestroyed(activity: Activity) {}
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
         })
     }
 }

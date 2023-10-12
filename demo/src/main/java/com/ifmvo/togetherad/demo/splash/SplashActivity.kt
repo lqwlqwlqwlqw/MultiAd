@@ -3,7 +3,7 @@ package com.ifmvo.togetherad.demo.splash
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.bytedance.sdk.openadsdk.TTAdConstant
 import com.ifmvo.togetherad.core.custom.splashSkip.SplashSkipViewSimple2

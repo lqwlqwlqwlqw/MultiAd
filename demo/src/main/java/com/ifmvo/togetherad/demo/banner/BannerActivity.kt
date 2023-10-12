@@ -3,7 +3,7 @@ package com.ifmvo.togetherad.demo.banner
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.ifmvo.togetherad.core.helper.AdHelperBanner
 import com.ifmvo.togetherad.core.listener.BannerListener
@@ -13,7 +13,7 @@ import com.ifmvo.togetherad.csj.provider.CsjProvider
 import com.ifmvo.togetherad.demo.R
 import com.ifmvo.togetherad.demo.app.AdProviderType
 import com.ifmvo.togetherad.demo.app.TogetherAdAlias
-import kotlinx.android.synthetic.main.activity_banner.*
+import com.ifmvo.togetherad.demo.databinding.ActivityBannerBinding
 
 /**
  * Banner 横幅广告
@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_banner.*
  */
 class BannerActivity : AppCompatActivity() {
 
+    private lateinit var mBinding: ActivityBannerBinding
     companion object {
         fun action(context: Context) {
             context.startActivity(Intent(context, BannerActivity::class.java))
@@ -30,9 +31,11 @@ class BannerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mBinding = ActivityBannerBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_banner)
 
-        btnRequestShow.setOnClickListener {
+        mBinding.btnRequestShow.setOnClickListener {
             showBannerAd()
         }
 
@@ -41,7 +44,7 @@ class BannerActivity : AppCompatActivity() {
 
     private fun showBannerAd() {
 
-        adContainer.removeAllViews()
+        mBinding.adContainer.removeAllViews()
 
         val ratioMapBanner = linkedMapOf(
                 AdProviderType.GDT.type to 1,
@@ -54,7 +57,7 @@ class BannerActivity : AppCompatActivity() {
         //设置 穿山甲 Banner 尺寸
         CsjProvider.Banner.setExpressViewAcceptedSize(px2dp(this, ScreenUtil.getDisplayMetricsWidth(this)), px2dp(this, ScreenUtil.getDisplayMetricsWidth(this) / 8))
 
-        AdHelperBanner.show(activity = this, alias = TogetherAdAlias.AD_BANNER, container = adContainer, /*ratioMap = ratioMapBanner,*/ listener = object : BannerListener {
+        AdHelperBanner.show(activity = this, alias = TogetherAdAlias.AD_BANNER, container = mBinding.adContainer, /*ratioMap = ratioMapBanner,*/ listener = object : BannerListener {
             override fun onAdStartRequest(providerType: String) {
                 //在开始请求之前会回调此方法，失败切换的情况会回调多次
                 addLog("\n开始请求了，$providerType")
@@ -101,7 +104,7 @@ class BannerActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         //销毁，避免内存泄漏
-        adContainer?.removeAllViews()//容器需要清空，否则广点通的Banner会一直请求（ gdt的bug ）
+        mBinding.adContainer?.removeAllViews()//容器需要清空，否则广点通的Banner会一直请求（ gdt的bug ）
         AdHelperBanner.destroy()
     }
 
@@ -109,8 +112,8 @@ class BannerActivity : AppCompatActivity() {
 
     private fun addLog(content: String?) {
         logStr = logStr + content + "\n"
-        log.text = logStr
+        mBinding.log.text = logStr
 
-        info.post { info.fullScroll(View.FOCUS_DOWN) }
+        mBinding.info.post { mBinding.info.fullScroll(View.FOCUS_DOWN) }
     }
 }

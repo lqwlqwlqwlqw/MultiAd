@@ -1,18 +1,17 @@
 package com.ifmvo.togetherad.demo.express
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.ifmvo.togetherad.core.helper.AdHelperNativeExpress
 import com.ifmvo.togetherad.core.listener.NativeExpressListener
 import com.ifmvo.togetherad.core.utils.loge
 import com.ifmvo.togetherad.core.utils.logi
-import com.ifmvo.togetherad.csj.provider.CsjProvider
 import com.ifmvo.togetherad.demo.app.AdProviderType
 import com.ifmvo.togetherad.demo.R
 import com.ifmvo.togetherad.demo.app.TogetherAdAlias
+import com.ifmvo.togetherad.demo.databinding.ActivityNativeExpressSimpleBinding
 import com.ifmvo.togetherad.demo.native_.template.NativeExpressTemplateSimple
-import kotlinx.android.synthetic.main.activity_native_express_simple.*
 
 /**
  * Created by Matthew Chen on 2020/11/26.
@@ -20,6 +19,8 @@ import kotlinx.android.synthetic.main.activity_native_express_simple.*
 class NativeExpressSimpleActivity : AppCompatActivity() {
 
     private val tag = "NativeExpressSimpleActivity"
+
+    private lateinit var mBinding: ActivityNativeExpressSimpleBinding
 
     private var mAdObject: Any? = null
 
@@ -30,13 +31,14 @@ class NativeExpressSimpleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBinding = ActivityNativeExpressSimpleBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_native_express_simple)
 
-        btnRequest.setOnClickListener {
+        mBinding.btnRequest.setOnClickListener {
             requestAd()
         }
 
-        btnShow.setOnClickListener {
+        mBinding.btnShow.setOnClickListener {
             showAd()
         }
     }
@@ -78,7 +80,7 @@ class NativeExpressSimpleActivity : AppCompatActivity() {
 
             override fun onAdClosed(providerType: String, adObject: Any?) {
                 //模板广告关闭了就会回调这里一次
-                adContainer.removeAllViews()
+                mBinding.adContainer.removeAllViews()
                 addLog("模板广告关闭了")
                 "onAdClosed".logi(tag)
             }
@@ -104,7 +106,7 @@ class NativeExpressSimpleActivity : AppCompatActivity() {
     }
 
     private fun showAd() {
-        AdHelperNativeExpress.show(mAdObject, adContainer, NativeExpressTemplateSimple())
+        AdHelperNativeExpress.show(mAdObject, mBinding.adContainer, NativeExpressTemplateSimple())
     }
 
     override fun onDestroy() {
@@ -118,8 +120,8 @@ class NativeExpressSimpleActivity : AppCompatActivity() {
 
     private fun addLog(content: String?) {
         logStr = logStr + content + "\n"
-        log.text = logStr
+        mBinding.log.text = logStr
 
-        info.post { info.fullScroll(View.FOCUS_DOWN) }
+        mBinding.info.post { mBinding.info.fullScroll(View.FOCUS_DOWN) }
     }
 }

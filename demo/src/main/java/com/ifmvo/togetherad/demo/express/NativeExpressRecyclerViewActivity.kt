@@ -3,16 +3,15 @@ package com.ifmvo.togetherad.demo.express
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ifmvo.togetherad.core.helper.AdHelperNativeExpress
 import com.ifmvo.togetherad.core.listener.NativeExpressListener
 import com.ifmvo.togetherad.demo.app.AdProviderType
 import com.ifmvo.togetherad.demo.R
 import com.ifmvo.togetherad.demo.app.TogetherAdAlias
+import com.ifmvo.togetherad.demo.databinding.ActivityNativeRecyclerviewBinding
 import com.ifmvo.togetherad.demo.other.ContentDataEntity
-import kotlinx.android.synthetic.main.activity_native_recyclerview.*
 
 
 /**
@@ -21,6 +20,8 @@ import kotlinx.android.synthetic.main.activity_native_recyclerview.*
  * Created by Matthew Chen on 2020-04-20.
  */
 class NativeExpressRecyclerViewActivity : AppCompatActivity() {
+
+    private lateinit var mBinding: ActivityNativeRecyclerviewBinding
 
     //使用 Map<String, Int> 配置广告商 权重，通俗的讲就是 随机请求的概率占比
     private val ratioMapNativeExpressRecycler = mapOf(
@@ -38,13 +39,14 @@ class NativeExpressRecyclerViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBinding = ActivityNativeRecyclerviewBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_native_recyclerview)
 
         requestRvAd {
             //使用 RecyclerView 展示合并后的数据
             val allList = mergeContentAd(getContentData(), it)
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.adapter = NativeExpressAdapter(allList)
+            mBinding.recyclerView.layoutManager = LinearLayoutManager(this)
+            mBinding.recyclerView.adapter = NativeExpressAdapter(allList)
         }
     }
 
