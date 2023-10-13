@@ -4,8 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.LinearLayoutManager
-import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bytedance.sdk.openadsdk.AdSlot
 import com.ifmvo.togetherad.core.helper.AdHelperNativePro
 import com.ifmvo.togetherad.core.listener.NativeListener
@@ -13,8 +12,8 @@ import com.ifmvo.togetherad.csj.provider.CsjProvider
 import com.ifmvo.togetherad.demo.app.AdProviderType
 import com.ifmvo.togetherad.demo.R
 import com.ifmvo.togetherad.demo.app.TogetherAdAlias
+import com.ifmvo.togetherad.demo.databinding.ActivityNativeRecyclerviewBinding
 import com.ifmvo.togetherad.demo.other.ContentDataEntity
-import kotlinx.android.synthetic.main.activity_native_recyclerview.*
 
 
 /**
@@ -30,6 +29,8 @@ class NativeRecyclerViewActivity : AppCompatActivity() {
             AdProviderType.CSJ.type to 1
     )
 
+    private lateinit var mBinding: ActivityNativeRecyclerviewBinding
+
     private val adHelperNativeRv by lazy { AdHelperNativePro(this, TogetherAdAlias.AD_NATIVE_RECYCLERVIEW, /*ratioMapNativeRecycler,*/ 3) }
 
     companion object {
@@ -40,13 +41,14 @@ class NativeRecyclerViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBinding = ActivityNativeRecyclerviewBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_native_recyclerview)
 
         requestRvAd {
             //使用 RecyclerView 展示合并后的数据
             val allList = mergeContentAd(getContentData(), it)
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.adapter = NativeAdapter(allList)
+            mBinding.recyclerView.layoutManager = LinearLayoutManager(this)
+            mBinding.recyclerView.adapter = NativeAdapter(allList)
         }
     }
 

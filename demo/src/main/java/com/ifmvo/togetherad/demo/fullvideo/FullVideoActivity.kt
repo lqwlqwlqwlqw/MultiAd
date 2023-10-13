@@ -12,7 +12,7 @@ import com.ifmvo.togetherad.core.utils.logi
 import com.ifmvo.togetherad.demo.R
 import com.ifmvo.togetherad.demo.app.AdProviderType
 import com.ifmvo.togetherad.demo.app.TogetherAdAlias
-import kotlinx.android.synthetic.main.activity_reward.*
+import com.ifmvo.togetherad.demo.databinding.ActivityFullVideoBinding
 
 /**
  *
@@ -21,6 +21,8 @@ import kotlinx.android.synthetic.main.activity_reward.*
 class FullVideoActivity : AppCompatActivity() {
 
     private val tag = "FullVideoActivity"
+
+    private lateinit var mBinding: ActivityFullVideoBinding
 
     private lateinit var adHelperFullVideo: AdHelperFullVideo
 
@@ -32,6 +34,7 @@ class FullVideoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBinding = ActivityFullVideoBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_full_video)
 
         //使用 Map<String, Int> 配置广告商 权重，通俗的讲就是 随机请求的概率占比
@@ -102,12 +105,12 @@ class FullVideoActivity : AppCompatActivity() {
             }
         })
 
-        btnRequest.setOnClickListener {
+        mBinding.btnRequest.setOnClickListener {
             //开始请求广告
             adHelperFullVideo.load()
         }
 
-        btnShow.setOnClickListener {
+        mBinding.btnShow.setOnClickListener {
             //onAdLoaded 回调之后才能展示
             adHelperFullVideo.show()
         }
@@ -117,8 +120,8 @@ class FullVideoActivity : AppCompatActivity() {
 
     private fun addLog(content: String?) {
         logStr = logStr + content + "\n"
-        log.text = logStr
+        mBinding.log.text = logStr
 
-        info.post { info.fullScroll(View.FOCUS_DOWN) }
+        mBinding.info.post { mBinding.info.fullScroll(View.FOCUS_DOWN) }
     }
 }

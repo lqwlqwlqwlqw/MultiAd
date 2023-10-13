@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
-import com.bytedance.sdk.openadsdk.TTAdConstant
 import com.ifmvo.togetherad.core.custom.splashSkip.SplashSkipViewSimple2
 import com.ifmvo.togetherad.core.helper.AdHelperSplash
 import com.ifmvo.togetherad.core.listener.SplashListener
@@ -18,7 +17,7 @@ import com.ifmvo.togetherad.demo.MainActivity
 import com.ifmvo.togetherad.demo.R
 import com.ifmvo.togetherad.demo.app.AdProviderType
 import com.ifmvo.togetherad.demo.app.TogetherAdAlias
-import kotlinx.android.synthetic.main.activity_splash.*
+import com.ifmvo.togetherad.demo.databinding.ActivitySplashBinding
 
 /**
  * 开屏广告使用示例
@@ -32,6 +31,8 @@ class SplashActivity : AppCompatActivity() {
     //是否可以跳转，逻辑 copy from gdt demo
     private var canJump = false
 
+    private lateinit var mBinding: ActivitySplashBinding
+
     companion object {
         fun action(context: Context) {
             context.startActivity(Intent(context, SplashActivity::class.java))
@@ -40,6 +41,9 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mBinding = ActivitySplashBinding.inflate(layoutInflater)
+
         setContentView(R.layout.activity_splash)
 
         //开始请求开屏广告
@@ -91,7 +95,7 @@ class SplashActivity : AppCompatActivity() {
          * container: 必传。请求到广告之后会自动添加到 container 这个布局中展示。
          * listener: 非必传。如果你不需要监听结果可以不传或传空。各个回调方法也可以选择性添加
          */
-        AdHelperSplash.show(activity = this, alias = TogetherAdAlias.AD_SPLASH, /*ratioMap = ratioMapSplash,*/ container = adContainer, listener = object : SplashListener {
+        AdHelperSplash.show(activity = this, alias = TogetherAdAlias.AD_SPLASH, /*ratioMap = ratioMapSplash,*/ container = mBinding.adContainer, listener = object : SplashListener {
 
             override fun onAdStartRequest(providerType: String) {
                 //在开始请求之前会回调此方法，失败切换的情况会回调多次
@@ -164,7 +168,7 @@ class SplashActivity : AppCompatActivity() {
             return
         }
 
-        adContainer.postDelayed({
+        mBinding.adContainer.postDelayed({
             //在这里跳转到 Home 主界面
             MainActivity.action(this)
             finish()
@@ -175,8 +179,8 @@ class SplashActivity : AppCompatActivity() {
 
     private fun addLog(content: String?) {
         logStr = logStr + content + "\n"
-        log.text = logStr
+        mBinding.log.text = logStr
 
-        info.post { info.fullScroll(View.FOCUS_DOWN) }
+        mBinding.info.post { mBinding.info.fullScroll(View.FOCUS_DOWN) }
     }
 }

@@ -8,8 +8,8 @@ import com.ifmvo.togetherad.core.utils.logi
 import com.ifmvo.togetherad.demo.R
 import com.ifmvo.togetherad.demo.app.AdProviderType
 import com.ifmvo.togetherad.demo.app.TogetherAdAlias
+import com.ifmvo.togetherad.demo.databinding.ActivityVerticalPremovieBinding
 import com.ifmvo.togetherad.demo.hybrid.helper.AdHelperHybridVerticalPreMovie
-import kotlinx.android.synthetic.main.activity_vertical_premovie.*
 
 /**
  * Created by Matthew Chen on 2020/12/1.
@@ -18,19 +18,22 @@ class VerticalPreMovieHybridActivity : AppCompatActivity() {
 
     private val tag = "VerticalPreMovieHybridActivity"
 
+    private lateinit var mBinding: ActivityVerticalPremovieBinding
+
     private val adHelper by lazy {
         val ratioMapVerticalPreMovie = linkedMapOf(
                 AdProviderType.GDT.type to 1,
                 AdProviderType.CSJ.type to 1
         )
-        AdHelperHybridVerticalPreMovie(this, TogetherAdAlias.AD_HYBRID_VERTICAL_PREMOVIE, adContainer/*, ratioMapVerticalPreMovie*/)
+        AdHelperHybridVerticalPreMovie(this, TogetherAdAlias.AD_HYBRID_VERTICAL_PREMOVIE, mBinding.adContainer/*, ratioMapVerticalPreMovie*/)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBinding = ActivityVerticalPremovieBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_vertical_premovie)
 
-        btnRequestAndShow.setOnClickListener {
+        mBinding.btnRequestAndShow.setOnClickListener {
             requestAd()
         }
     }
@@ -99,8 +102,8 @@ class VerticalPreMovieHybridActivity : AppCompatActivity() {
 
     private fun addLog(content: String?) {
         logStr = logStr + content + "\n"
-        log.text = logStr
+        mBinding.log.text = logStr
 
-        info.post { info.fullScroll(View.FOCUS_DOWN) }
+        mBinding.info.post { mBinding.info.fullScroll(View.FOCUS_DOWN) }
     }
 }

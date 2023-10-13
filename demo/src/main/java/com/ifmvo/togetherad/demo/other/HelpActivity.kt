@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ifmvo.togetherad.demo.R
-import kotlinx.android.synthetic.main.activity_help.*
+import com.ifmvo.togetherad.demo.databinding.ActivityHelpBinding
 
 /**
  * 采坑指南
@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_help.*
  * Created by Matthew Chen on 2020/5/22.
  */
 class HelpActivity : AppCompatActivity() {
+
+    private lateinit var mBinding: ActivityHelpBinding
 
     companion object {
         fun action(context: Context) {
@@ -22,6 +24,9 @@ class HelpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mBinding = ActivityHelpBinding.inflate(layoutInflater)
+
         setContentView(R.layout.activity_help)
 
         val txt = """
@@ -73,6 +78,6 @@ gdt: 请求失败了：错误码: 5004, 错误信息：没有广告
 
 
         """.trimIndent()
-        tvText.text = txt
+        mBinding.tvText.text = txt
     }
 }

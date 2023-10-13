@@ -10,7 +10,7 @@ import com.ifmvo.togetherad.core.listener.InterListener
 import com.ifmvo.togetherad.demo.app.AdProviderType
 import com.ifmvo.togetherad.demo.R
 import com.ifmvo.togetherad.demo.app.TogetherAdAlias
-import kotlinx.android.synthetic.main.activity_inter.*
+import com.ifmvo.togetherad.demo.databinding.ActivityInterBinding
 
 /**
  *
@@ -20,6 +20,8 @@ class InterActivity : AppCompatActivity() {
 
     private var adHelperInter: AdHelperInter? = null
 
+    private lateinit var mBinding: ActivityInterBinding
+
     companion object {
         fun action(context: Context) {
             context.startActivity(Intent(context, InterActivity::class.java))
@@ -28,6 +30,7 @@ class InterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBinding = ActivityInterBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_inter)
 
         //设置 穿山甲 Inter插屏广告 可接受图片尺寸,可以不设置，默认为 600 600
@@ -75,12 +78,12 @@ class InterActivity : AppCompatActivity() {
             }
         })
 
-        btnRequest.setOnClickListener {
+        mBinding.btnRequest.setOnClickListener {
             //开始请求插屏广告
             adHelperInter?.load()
         }
 
-        btnShow.setOnClickListener {
+        mBinding.btnShow.setOnClickListener {
             //开始展示插屏广告，必须在 onAdLoaded 回调之后展示
             adHelperInter?.show()
         }
@@ -96,8 +99,8 @@ class InterActivity : AppCompatActivity() {
 
     private fun addLog(content: String?) {
         logStr = logStr + content + "\n"
-        log.text = logStr
+        mBinding.log.text = logStr
 
-        info.post { info.fullScroll(View.FOCUS_DOWN) }
+        mBinding.info.post { mBinding.info.fullScroll(View.FOCUS_DOWN) }
     }
 }

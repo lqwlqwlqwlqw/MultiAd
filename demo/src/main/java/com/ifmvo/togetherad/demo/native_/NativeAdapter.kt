@@ -1,12 +1,11 @@
 package com.ifmvo.togetherad.demo.native_
 
-import androidx.appcompat.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.ifmvo.togetherad.core.TogetherAd
 import com.ifmvo.togetherad.core.helper.AdHelperNativePro
 import com.ifmvo.togetherad.core.listener.NativeViewListener

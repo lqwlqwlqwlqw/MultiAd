@@ -16,11 +16,11 @@ import com.ifmvo.togetherad.csj.provider.CsjProvider
 import com.ifmvo.togetherad.demo.app.AdProviderType
 import com.ifmvo.togetherad.demo.R
 import com.ifmvo.togetherad.demo.app.TogetherAdAlias
+import com.ifmvo.togetherad.demo.databinding.ActivityNativeSimpleBinding
 import com.ifmvo.togetherad.demo.native_.template.NativeTemplateSimple1
 import com.ifmvo.togetherad.demo.native_.template.NativeTemplateSimple2
 import com.ifmvo.togetherad.demo.native_.template.NativeTemplateSimple4
 import com.ifmvo.togetherad.demo.native_.template.NativeTemplateSimple5
-import kotlinx.android.synthetic.main.activity_native_simple.*
 
 /**
  * 原生自渲染的简单用法
@@ -30,6 +30,8 @@ import kotlinx.android.synthetic.main.activity_native_simple.*
 class NativeSimpleActivity : AppCompatActivity() {
 
     private val tag = "NativeSimpleActivity"
+
+    private lateinit var mBinding: ActivityNativeSimpleBinding
 
     //声明
     private var adHelperNative: AdHelperNativePro? = null
@@ -44,6 +46,9 @@ class NativeSimpleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mBinding = ActivityNativeSimpleBinding.inflate(layoutInflater)
+
         setContentView(R.layout.activity_native_simple)
 
         //使用 Map<String, Int> 配置广告商 权重，通俗的讲就是 随机请求的概率占比
@@ -55,25 +60,25 @@ class NativeSimpleActivity : AppCompatActivity() {
         //初始化  maxCount: 返回广告的最大个数 （ 由于各个广告提供商返回的广告数量不等，所以只能控制返回广告的最大数量。例：maxCount = 4，返回的 1 ≤ List.size ≤ 4 ）
         adHelperNative = AdHelperNativePro(activity = this, alias = TogetherAdAlias.AD_NATIVE_SIMPLE, maxCount = 1/*, ratioMap = ratioMapNativeSimple*/)
 
-        btnRequest.setOnClickListener {
+        mBinding.btnRequest.setOnClickListener {
             requestAd()
         }
 
-        btnShow1.setOnClickListener {
+        mBinding.btnShow1.setOnClickListener {
             showAd(adObject = mAdObject, nativeTemplate = NativeTemplateSimple1())
         }
 
-        btnShow2.setOnClickListener {
+        mBinding.btnShow2.setOnClickListener {
             showAd(adObject = mAdObject, nativeTemplate = NativeTemplateSimple2())
         }
 
-        btnShow4.setOnClickListener {
+        mBinding.btnShow4.setOnClickListener {
             showAd(adObject = mAdObject, nativeTemplate = NativeTemplateSimple4 {
-                adContainer.removeAllViews()
+                mBinding.adContainer.removeAllViews()
             })
         }
 
-        btnShow5.setOnClickListener {
+        mBinding.btnShow5.setOnClickListener {
             showAd(adObject = mAdObject, nativeTemplate = NativeTemplateSimple5 {
 
             })
@@ -158,7 +163,7 @@ class NativeSimpleActivity : AppCompatActivity() {
     private fun showAd(adObject: Any?, nativeTemplate: BaseNativeTemplate) {
         if (adObject == null) return
 
-        AdHelperNativePro.show(adObject = adObject, container = adContainer, nativeTemplate = nativeTemplate, listener = object : NativeViewListener {
+        AdHelperNativePro.show(adObject = adObject, container = mBinding.adContainer, nativeTemplate = nativeTemplate, listener = object : NativeViewListener {
             override fun onAdExposed(providerType: String) {
                 //每次曝光就会回调这里一次
                 addLog("原生广告曝光了")
@@ -192,8 +197,8 @@ class NativeSimpleActivity : AppCompatActivity() {
 
     private fun addLog(content: String?) {
         logStr = logStr + content + "\n"
-        log.text = logStr
+        mBinding.log.text = logStr
 
-        info.post { info.fullScroll(View.FOCUS_DOWN) }
+        mBinding.info.post { mBinding.info.fullScroll(View.FOCUS_DOWN) }
     }
 }

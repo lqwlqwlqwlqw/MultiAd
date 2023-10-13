@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
-import com.ifmvo.togetherad.core.helper.AdHelperReward
 import com.ifmvo.togetherad.core.helper.AdHelperRewardPro
 import com.ifmvo.togetherad.core.listener.RewardListener
 import com.ifmvo.togetherad.core.utils.loge
@@ -13,7 +12,7 @@ import com.ifmvo.togetherad.core.utils.logi
 import com.ifmvo.togetherad.demo.app.AdProviderType
 import com.ifmvo.togetherad.demo.R
 import com.ifmvo.togetherad.demo.app.TogetherAdAlias
-import kotlinx.android.synthetic.main.activity_reward.*
+import com.ifmvo.togetherad.demo.databinding.ActivityRewardProBinding
 
 /**
  * 激励广告使用实例
@@ -24,6 +23,7 @@ class RewardProActivity : AppCompatActivity() {
 
     private val tag = "RewardProActivity"
 
+    private lateinit var mBinding: ActivityRewardProBinding
     companion object {
         fun action(context: Context) {
             context.startActivity(Intent(context, RewardActivity::class.java))
@@ -32,6 +32,9 @@ class RewardProActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mBinding = ActivityRewardProBinding.inflate(layoutInflater)
+
         setContentView(R.layout.activity_reward_pro)
 
         //使用 Map<String, Int> 配置广告商 权重，通俗的讲就是 随机请求的概率占比
@@ -137,8 +140,8 @@ class RewardProActivity : AppCompatActivity() {
 
     private fun addLog(content: String?) {
         logStr = logStr + content + "\n"
-        log.text = logStr
+        mBinding.log.text = logStr
 
-        info.post { info.fullScroll(View.FOCUS_DOWN) }
+        mBinding.info.post { mBinding.info.fullScroll(View.FOCUS_DOWN) }
     }
 }

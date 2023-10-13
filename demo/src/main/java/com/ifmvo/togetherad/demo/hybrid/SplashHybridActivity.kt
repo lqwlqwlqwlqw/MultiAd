@@ -14,8 +14,8 @@ import com.ifmvo.togetherad.csj.provider.CsjProvider
 import com.ifmvo.togetherad.demo.app.AdProviderType
 import com.ifmvo.togetherad.demo.R
 import com.ifmvo.togetherad.demo.app.TogetherAdAlias
+import com.ifmvo.togetherad.demo.databinding.ActivitySplashProBinding
 import com.ifmvo.togetherad.demo.hybrid.helper.AdHelperHybridSplash
-import kotlinx.android.synthetic.main.activity_splash_pro.*
 
 /**
  * 开屏 & 原生 混合使用
@@ -25,6 +25,8 @@ import kotlinx.android.synthetic.main.activity_splash_pro.*
 class SplashHybridActivity : AppCompatActivity() {
 
     private val tag = "SplashHybridActivity"
+
+    private lateinit var mBinding: ActivitySplashProBinding
 
     private val adHelperSplashHybrid by lazy {
         /**
@@ -51,14 +53,15 @@ class SplashHybridActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBinding = ActivitySplashProBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_splash_pro)
 
-        btnLoad.setOnClickListener {
+        mBinding.btnLoad.setOnClickListener {
             //开始请求开屏广告
             requestSplashAd()
         }
 
-        btnShow.setOnClickListener {
+        mBinding.btnShow.setOnClickListener {
             //展示广告
             showSplashAd()
         }
@@ -100,7 +103,7 @@ class SplashHybridActivity : AppCompatActivity() {
             }
 
             override fun onAdLoaded(providerType: String) {
-                btnShow.isEnabled = true
+                mBinding.btnShow.isEnabled = true
                 //广告请求成功的回调，每次请求只回调一次
                 addLog("开屏广告请求好了，$providerType")
                 "onAdLoaded: $providerType".logi(tag)
@@ -147,7 +150,7 @@ class SplashHybridActivity : AppCompatActivity() {
      */
     private fun showSplashAd() {
         //展示广告并返回是否展示成功
-        val showAdIsSuccess = adHelperSplashHybrid.showAd(adContainer)
+        val showAdIsSuccess = adHelperSplashHybrid.showAd(mBinding.adContainer)
         //如果没有展示成功就直接跳走
         if (!showAdIsSuccess) {
             actionHome(1000)
@@ -173,7 +176,7 @@ class SplashHybridActivity : AppCompatActivity() {
     override fun onBackPressed() {}
 
     private fun actionHome(delayMillis: Long) {
-        adContainer.postDelayed({
+        mBinding.adContainer.postDelayed({
             //在这里跳转到 Home 主界面
             finish()
         }, delayMillis)
@@ -183,8 +186,8 @@ class SplashHybridActivity : AppCompatActivity() {
 
     private fun addLog(content: String?) {
         logStr = logStr + content + "\n"
-        log.text = logStr
+        mBinding.log.text = logStr
 
-        info.post { info.fullScroll(View.FOCUS_DOWN) }
+        mBinding.info.post { mBinding.info.fullScroll(View.FOCUS_DOWN) }
     }
 }
