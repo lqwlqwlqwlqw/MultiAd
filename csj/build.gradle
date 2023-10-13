@@ -36,8 +36,8 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-//    embed(name: 'open_ad_sdk_5.6.0.7', ext: 'aar')
+//    api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    embed(name: 'open_ad_sdk_5.6.0.7', ext: 'aar')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     api project(':core')
