@@ -49,7 +49,7 @@ class NativeSimpleActivity : AppCompatActivity() {
 
         mBinding = ActivityNativeSimpleBinding.inflate(layoutInflater)
 
-        setContentView(R.layout.activity_native_simple)
+        setContentView(mBinding.root)
 
         //使用 Map<String, Int> 配置广告商 权重，通俗的讲就是 随机请求的概率占比
         val ratioMapNativeSimple = linkedMapOf(

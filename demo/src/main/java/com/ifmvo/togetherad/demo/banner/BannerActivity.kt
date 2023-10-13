@@ -33,7 +33,7 @@ class BannerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         mBinding = ActivityBannerBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_banner)
+        setContentView(mBinding.root)
 
         mBinding.btnRequestShow.setOnClickListener {
             showBannerAd()

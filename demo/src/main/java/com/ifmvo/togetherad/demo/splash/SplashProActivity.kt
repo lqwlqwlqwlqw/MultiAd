@@ -57,7 +57,7 @@ class SplashProActivity : AppCompatActivity() {
 
         mBinding = ActivitySplashProBinding.inflate(layoutInflater)
 
-        setContentView(R.layout.activity_splash_pro)
+        setContentView(mBinding.root)
 
         mBinding.btnLoad.setOnClickListener {
             //开始请求开屏广告

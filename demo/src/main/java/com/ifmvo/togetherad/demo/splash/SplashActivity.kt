@@ -44,7 +44,7 @@ class SplashActivity : AppCompatActivity() {
 
         mBinding = ActivitySplashBinding.inflate(layoutInflater)
 
-        setContentView(R.layout.activity_splash)
+        setContentView(mBinding.root)
 
         //开始请求开屏广告
         requestSplashAd()

@@ -32,7 +32,7 @@ class NativeExpressSimpleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityNativeExpressSimpleBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_native_express_simple)
+        setContentView(mBinding.root)
 
         mBinding.btnRequest.setOnClickListener {
             requestAd()

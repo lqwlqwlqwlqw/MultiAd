@@ -27,7 +27,7 @@ class HelpActivity : AppCompatActivity() {
 
         mBinding = ActivityHelpBinding.inflate(layoutInflater)
 
-        setContentView(R.layout.activity_help)
+        setContentView(mBinding.root)
 
         val txt = """
             

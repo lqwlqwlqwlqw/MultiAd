@@ -31,7 +31,7 @@ class VerticalPreMovieHybridActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityVerticalPremovieBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_vertical_premovie)
+        setContentView(mBinding.root)
 
         mBinding.btnRequestAndShow.setOnClickListener {
             requestAd()

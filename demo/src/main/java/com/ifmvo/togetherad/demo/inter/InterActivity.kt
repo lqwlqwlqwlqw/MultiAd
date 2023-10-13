@@ -31,7 +31,7 @@ class InterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityInterBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_inter)
+        setContentView(mBinding.root)
 
         //设置 穿山甲 Inter插屏广告 可接受图片尺寸,可以不设置，默认为 600 600
         //CsjProvider.Inter.setImageAcceptedSize(600, 600)

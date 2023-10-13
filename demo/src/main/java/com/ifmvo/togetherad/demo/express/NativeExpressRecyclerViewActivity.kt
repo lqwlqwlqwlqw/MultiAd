@@ -40,7 +40,7 @@ class NativeExpressRecyclerViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityNativeRecyclerviewBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_native_recyclerview)
+        setContentView(mBinding.root)
 
         requestRvAd {
             //使用 RecyclerView 展示合并后的数据
