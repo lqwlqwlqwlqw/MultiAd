@@ -1,6 +1,4 @@
 plugins {
-    // 1、增加 maven-publish
-    id 'maven-publish'
     id 'com.android.library'
     id 'kotlin-android'
 }

@@ -1,15 +1,13 @@
-plugins {
-    // 1、增加 maven-publish
-    id 'maven-publish'
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'com.kezong.fat-aar'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+if (enable_packed_aar.equalsIgnoreCase("true")) {
+    apply plugin: 'com.kezong.fat-aar'
 }
 
 // JitPack Maven
 //apply plugin: 'com.github.dcendents.android-maven'
 // Your Group
-group = 'com.github.lqw'
+//group = 'com.github.lqw'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -33,34 +31,44 @@ android {
     publishing {
         singleVariant("release")
     }
-//    repositories { flatDir { dirs 'libs' } }
+
+    repositories {
+        if (!enable_packed_aar.equalsIgnoreCase("true")) {
+            flatDir {
+                dirs 'libs'
+            }
+        }
+    }
 
 }
 
 dependencies {
-//    api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    embed(name: 'GDTSDK.unionNormal.4.542.1412', ext: 'aar')
+    if (enable_packed_aar.equalsIgnoreCase("true")) {
+        embed(name: 'GDTSDK.unionNormal.4.542.1412', ext: 'aar')
+    } else {
+        implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    }
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    api project(':core')
+    implementation project(':core')
 }
 
-
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release         // 表示发布 release（jitpack 都不会使用到）
-                groupId = 'com.github.lqw'
-                artifactId = 'MultiAd'       // 依赖库的名称（jitpack 都不会使用到）
-                version ="1.0.0"                //当前版本依赖库版本号，这个jitpack不会使用到，只是我们开发者自己查看
-            }
-        }
-    }
-}
-
-task generateSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
-}
+//
+//
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            release(MavenPublication) {
+//                from components.release         // 表示发布 release（jitpack 都不会使用到）
+//                groupId = 'com.github.lqw'
+//                artifactId = 'MultiAd'       // 依赖库的名称（jitpack 都不会使用到）
+//                version ="1.0.0"                //当前版本依赖库版本号，这个jitpack不会使用到，只是我们开发者自己查看
+//            }
+//        }
+//    }
+//}
+//
+//task generateSourcesJar(type: Jar) {
+//    from android.sourceSets.main.java.srcDirs
+//    classifier 'sources'
+//}

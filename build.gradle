@@ -1,4 +1,5 @@
 apply from: "config.gradle"
+
 buildscript {
     ext.kotlin_version = '1.9.10'
     repositories {
@@ -9,7 +10,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:7.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.github.kezong:fat-aar:1.3.8'
     }
