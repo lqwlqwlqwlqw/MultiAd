@@ -43,7 +43,16 @@ android {
 }
 
 dependencies {
+    if (enable_packed_aar.equalsIgnoreCase("true")) {
+        embed project(':csj')
+        embed project(':gdt')
+    }
+//        implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+//        implementation project(':csj')
+//        implementation project(':gdt')
+//    }
 //    implementation fileTree(dir: '../libs', include: ['*.jar', '*.aar'])
+
 //    embed(name: 'open_ad_sdk_5.6.0.7', ext: 'aar')
 //    embed(name: 'GDTSDK.unionNormal.4.542.1412', ext: 'aar')
 
@@ -53,8 +62,6 @@ dependencies {
 //    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    embed project(':csj')
-    embed project(':gdt')
 }
 
 
