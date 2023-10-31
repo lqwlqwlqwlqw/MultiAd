@@ -1,9 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
 
 if (enable_packed_aar.equalsIgnoreCase("true")) {
     // 1、增加 maven-publish
-    apply plugin: 'maven-publish'
+//    apply plugin: 'maven-publish'
     apply plugin: 'com.kezong.fat-aar'
 }
 

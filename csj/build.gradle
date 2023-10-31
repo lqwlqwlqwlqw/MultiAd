@@ -34,11 +34,11 @@ android {
     }
 
     repositories {
-        if (!enable_packed_aar.equalsIgnoreCase("true")) {
+//        if (!enable_packed_aar.equalsIgnoreCase("true")) {
             flatDir {
                 dirs 'libs'
             }
-        }
+//        }
     }
 }
 
@@ -46,12 +46,12 @@ dependencies {
     if (enable_packed_aar.equalsIgnoreCase("true")) {
         embed(name: 'open_ad_sdk_5.6.0.7', ext: 'aar')
     } else {
-        implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+        api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     }
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    implementation project(':core')
+    api project(':core')
 }
 
 

@@ -16,15 +16,15 @@ buildscript {
     }
 }
 
-//allprojects {
-//    repositories {
-//        google()
-//        jcenter()
-//        mavenCentral()
-//        maven { url "https://mirrors.tencent.com/repository/maven/thirdparty" }
-//        maven { url 'https://jitpack.io' }
-//    }
-//}
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url "https://mirrors.tencent.com/repository/maven/thirdparty" }
+        maven { url 'https://jitpack.io' }
+    }
+}
 
 task clean(type: Delete) {
     delete rootProject.buildDir
