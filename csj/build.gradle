@@ -5,11 +5,6 @@ if (enable_packed_aar.equalsIgnoreCase("true")) {
     apply plugin: 'com.kezong.fat-aar'
 }
 
-// JitPack Maven
-//apply plugin: 'com.github.dcendents.android-maven'
-// Your Group
-//group = 'com.github.lqw'
-
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -67,8 +62,3 @@ afterEvaluate {
         }
     }
 }
-//
-//task generateSourcesJar(type: Jar) {
-//    from android.sourceSets.main.java.srcDirs
-//    classifier 'sources'
-//}
