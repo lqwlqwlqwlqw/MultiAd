@@ -1,10 +1,6 @@
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-}
-
-// Your Group
-group = 'com.github.lqw'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -28,4 +24,17 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release         // 表示发布 release（jitpack 都不会使用到）
+                groupId = 'com.github.lqwlqwlqwlqw.MultiAd'
+                artifactId = 'core'       // 依赖库的名称（jitpack 都不会使用到）
+                version ="1.0.1"                //当前版本依赖库版本号，这个jitpack不会使用到，只是我们开发者自己查看
+            }
+        }
+    }
 }
