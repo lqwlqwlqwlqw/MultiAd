@@ -2,6 +2,7 @@ package com.ifmvo.togetherad.csj
 
 import android.content.Context
 import com.bytedance.sdk.openadsdk.*
+import com.bytedance.sdk.openadsdk.TTAdSdk.Callback
 import com.ifmvo.togetherad.core.TogetherAd
 import com.ifmvo.togetherad.core.entity.AdProviderEntity
 import com.ifmvo.togetherad.csj.provider.CsjProvider
@@ -67,29 +68,58 @@ object TogetherAdCsj {
     /**
      * 简单初始化
      */
-    fun init(@NotNull context: Context, @NotNull adProviderType: String, @NotNull csjAdAppId: String, @NotNull appName: String) {
+    fun init(
+        @NotNull context: Context,
+        @NotNull adProviderType: String,
+        @NotNull csjAdAppId: String,
+        @NotNull appName: String
+    ) {
         init(context, adProviderType, csjAdAppId, appName, null, null)
     }
 
     /**
      * 自定义Provider初始化
      */
-    fun init(@NotNull context: Context, @NotNull adProviderType: String, @NotNull csjAdAppId: String, @NotNull appName: String, providerClassPath: String? = null) {
+    fun init(
+        @NotNull context: Context,
+        @NotNull adProviderType: String,
+        @NotNull csjAdAppId: String,
+        @NotNull appName: String,
+        providerClassPath: String? = null
+    ) {
         init(context, adProviderType, csjAdAppId, appName, null, providerClassPath)
     }
 
     /**
      * 广告位ID 初始化
      */
-    fun init(@NotNull context: Context, @NotNull adProviderType: String, @NotNull csjAdAppId: String, @NotNull appName: String, csjIdMap: Map<String, String>? = null) {
+    fun init(
+        @NotNull context: Context,
+        @NotNull adProviderType: String,
+        @NotNull csjAdAppId: String,
+        @NotNull appName: String,
+        csjIdMap: Map<String, String>? = null
+    ) {
         init(context, adProviderType, csjAdAppId, appName, csjIdMap, null)
     }
 
     /**
      * 自定义Provider + 广告位ID 一起初始化
      */
-    fun init(@NotNull context: Context, @NotNull adProviderType: String, @NotNull csjAdAppId: String, @NotNull appName: String, csjIdMap: Map<String, String>? = null, providerClassPath: String?) {
-        TogetherAd.addProvider(AdProviderEntity(adProviderType, if (providerClassPath?.isEmpty() != false) CsjProvider::class.java.name else providerClassPath))
+    fun init(
+        @NotNull context: Context,
+        @NotNull adProviderType: String,
+        @NotNull csjAdAppId: String,
+        @NotNull appName: String,
+        csjIdMap: Map<String, String>? = null,
+        providerClassPath: String?
+    ) {
+        TogetherAd.addProvider(
+            AdProviderEntity(
+                adProviderType,
+                if (providerClassPath?.isEmpty() != false) CsjProvider::class.java.name else providerClassPath
+            )
+        )
 
         csjIdMap?.let { idMapCsj.putAll(it) }
 
@@ -112,6 +142,15 @@ object TogetherAdCsj {
         }
         customController?.let { ttAdConfig.customController(it) }
         //初始化
-        TTAdSdk.init(context, ttAdConfig.build(), initCallback)
+        TTAdSdk.init(context, ttAdConfig.build())
+        TTAdSdk.start(object : TTAdSdk.Callback {
+            override fun success() {
+                initCallback?.success()
+            }
+
+            override fun fail(p0: Int, p1: String?) {
+                initCallback?.fail(p0, p1)
+            }
+        })
     }
 }

@@ -40,7 +40,7 @@ android {
 
 dependencies {
     if (enable_packed_aar.equalsIgnoreCase("true")) {
-        embed(name: 'open_ad_sdk_5.6.0.7', ext: 'aar')
+        embed(name: 'open_ad_sdk_5.7.0.6', ext: 'aar')
     } else {
         api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     }
