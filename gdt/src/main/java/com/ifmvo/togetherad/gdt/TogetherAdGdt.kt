@@ -3,6 +3,7 @@ package com.ifmvo.togetherad.gdt
 import android.content.Context
 import com.ifmvo.togetherad.core.TogetherAd
 import com.ifmvo.togetherad.core.entity.AdProviderEntity
+import com.ifmvo.togetherad.core.utils.logi
 import com.ifmvo.togetherad.gdt.provider.GdtProvider
 import com.qq.e.comm.compliance.DownloadConfirmListener
 import com.qq.e.comm.managers.GDTAdSdk
@@ -51,5 +52,7 @@ object TogetherAdGdt {
         TogetherAd.addProvider(AdProviderEntity(adProviderType, if (providerClassPath?.isEmpty() != false) GdtProvider::class.java.name else providerClassPath))
         gdtIdMap?.let { idMapGDT.putAll(it) }
         GDTAdSdk.init(context, gdtAdAppId)
+
+        "gdt 初始化完毕".logi()
     }
 }

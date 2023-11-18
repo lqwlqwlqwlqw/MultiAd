@@ -6,6 +6,7 @@ import com.bytedance.sdk.openadsdk.TTAdSdk.Callback
 import com.ifmvo.togetherad.core.TogetherAd
 import com.ifmvo.togetherad.core.entity.AdProviderEntity
 import com.ifmvo.togetherad.core.utils.loge
+import com.ifmvo.togetherad.core.utils.logi
 import com.ifmvo.togetherad.csj.provider.CsjProvider
 import org.jetbrains.annotations.NotNull
 
@@ -154,5 +155,7 @@ object TogetherAdCsj {
                 initCallback?.fail(p0, p1)
             }
         })
+
+        "csj 初始化完毕".logi()
     }
 }
