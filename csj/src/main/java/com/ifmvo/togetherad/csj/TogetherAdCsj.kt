@@ -5,6 +5,7 @@ import com.bytedance.sdk.openadsdk.*
 import com.bytedance.sdk.openadsdk.TTAdSdk.Callback
 import com.ifmvo.togetherad.core.TogetherAd
 import com.ifmvo.togetherad.core.entity.AdProviderEntity
+import com.ifmvo.togetherad.core.utils.loge
 import com.ifmvo.togetherad.csj.provider.CsjProvider
 import org.jetbrains.annotations.NotNull
 
@@ -149,6 +150,7 @@ object TogetherAdCsj {
             }
 
             override fun fail(p0: Int, p1: String?) {
+                "TTAdSdk.start 错误码：${p0}； 错误语言 ${p1}".loge()
                 initCallback?.fail(p0, p1)
             }
         })
