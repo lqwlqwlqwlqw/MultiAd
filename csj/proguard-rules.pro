@@ -21,17 +21,30 @@
 #-renamesourcefileattribute SourceFile
 
 #------------------------穿山甲的混淆---------------------------#
--keep class com.bytedance.sdk.openadsdk.** { *; }
--keep class com.bytedance.frameworks.** { *; }
 
--keep class ms.bd.c.Pgl.**{*;}
--keep class com.bytedance.mobsec.metasec.ml.**{*;}
+-optimizationpasses 5
 
--keep class com.ss.android.**{*;}
+#混淆时不会产生形形色色的类名
+-dontusemixedcaseclassnames
 
--keep class com.bytedance.embedapplog.** {*;}
--keep class com.bytedance.embed_dr.** {*;}
+#指定不去忽略非公共的库类
+-dontskipnonpubliclibraryclasses
 
--keep class com.bykv.vk.** {*;}
+#不预校验
+#-dontpreverify
 
--keep class com.ifmvo.togetherad.csj.** { *; }
+#不优化输入的类文件
+-dontoptimize
+
+-ignorewarnings
+
+-verbose
+
+#优化
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+
+#保护内部类
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
+-keep class com.bytedance.sdk.openadsdk.** {*;}
+-keep public interface com.bytedance.sdk.openadsdk.downloadnew.** {*;}
+-keep class com.pgl.sys.ces.* {*;}

@@ -38,7 +38,7 @@ abstract class CsjProviderSplash : CsjProviderReward() {
             adSlotBuilder.setImageAcceptedSize(CsjProvider.Splash.imageAcceptedSizeWidth, CsjProvider.Splash.imageAcceptedSizeHeight)
         }
 
-        TogetherAdCsj.mTTAdManager.createAdNative(activity).loadSplashAd(adSlotBuilder.build(), object : TTAdNative.CSJSplashAdListener {
+        TTAdSdk.getAdManager().createAdNative(activity).loadSplashAd(adSlotBuilder.build(), object : TTAdNative.CSJSplashAdListener {
 
             override fun onSplashLoadSuccess(p0: CSJSplashAd?) {
                 callbackSplashLoaded(adProviderType, alias, listener)
@@ -159,7 +159,7 @@ abstract class CsjProviderSplash : CsjProviderReward() {
             adSlotBuilder.setImageAcceptedSize(CsjProvider.Splash.imageAcceptedSizeWidth, CsjProvider.Splash.imageAcceptedSizeHeight)
         }
 
-        TogetherAdCsj.mTTAdManager.createAdNative(activity).loadSplashAd(adSlotBuilder.build(), object : TTAdNative.CSJSplashAdListener {
+        TTAdSdk.getAdManager().createAdNative(activity).loadSplashAd(adSlotBuilder.build(), object : TTAdNative.CSJSplashAdListener {
             override fun onSplashLoadSuccess(p0: CSJSplashAd?) {
                 callbackSplashLoaded(adProviderType, alias, listener)
             }

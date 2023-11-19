@@ -37,7 +37,7 @@ abstract class CsjProviderReward : CsjProviderNativeExpress() {
             adSlotBuilder.setExpressViewAcceptedSize(500f, 500f)
         }
 
-        TogetherAdCsj.mTTAdManager.createAdNative(activity).loadRewardVideoAd(adSlotBuilder.build(), object : TTAdNative.RewardVideoAdListener {
+        TTAdSdk.getAdManager().createAdNative(activity).loadRewardVideoAd(adSlotBuilder.build(), object : TTAdNative.RewardVideoAdListener {
             override fun onError(code: Int, message: String?) {
                 callbackRewardFailed(adProviderType, alias, listener, code, message)
                 mttRewardVideoAd = null
@@ -158,7 +158,7 @@ abstract class CsjProviderReward : CsjProviderNativeExpress() {
             adSlotBuilder.setExpressViewAcceptedSize(500f, 500f)
         }
 
-        TogetherAdCsj.mTTAdManager.createAdNative(activity).loadRewardVideoAd(adSlotBuilder.build(), object : TTAdNative.RewardVideoAdListener {
+        TTAdSdk.getAdManager().createAdNative(activity).loadRewardVideoAd(adSlotBuilder.build(), object : TTAdNative.RewardVideoAdListener {
             override fun onError(code: Int, message: String?) {
                 callbackRewardFailed(adProviderType, alias, listener, code, message)
                 mttRewardVideoAd = null

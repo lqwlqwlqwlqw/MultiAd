@@ -5,6 +5,7 @@ import android.view.View
 import com.bytedance.sdk.openadsdk.AdSlot
 import com.bytedance.sdk.openadsdk.TTAdDislike
 import com.bytedance.sdk.openadsdk.TTAdNative
+import com.bytedance.sdk.openadsdk.TTAdSdk
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd
 import com.ifmvo.togetherad.core.listener.NativeExpressListener
 import com.ifmvo.togetherad.core.utils.logv
@@ -28,7 +29,7 @@ abstract class CsjProviderNativeExpress : CsjProviderNative() {
                 .setExpressViewAcceptedSize(CsjProvider.NativeExpress.expressViewAcceptedSizeWidth, CsjProvider.NativeExpress.expressViewAcceptedSizeHeight)//期望模板广告view的size,单位dp
                 .build()
 
-        TogetherAdCsj.mTTAdManager.createAdNative(activity).loadNativeExpressAd(adSlot, object : TTAdNative.NativeExpressAdListener {
+        TTAdSdk.getAdManager().createAdNative(activity).loadNativeExpressAd(adSlot, object : TTAdNative.NativeExpressAdListener {
             override fun onNativeExpressAdLoad(ads: MutableList<TTNativeExpressAd>?) {
                 if (activity.isFinishing || activity.isDestroyed) {
                     "宿主Activity已销毁".logv()

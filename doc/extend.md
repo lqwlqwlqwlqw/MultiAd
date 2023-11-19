@@ -56,7 +56,7 @@ class CustomCsjProvider : CsjProvider() {
                 .setImageAcceptedSize(Banner.imageAcceptedSizeWidth, Banner.imageAcceptedSizeHeight)
                 .build()
 
-        TogetherAdCsj.mTTAdManager.createAdNative(activity).loadBannerAd(adSlot, object : TTAdNative.BannerAdListener {
+        TTAdSdk.getAdManager().createAdNative(activity).loadBannerAd(adSlot, object : TTAdNative.BannerAdListener {
             override fun onBannerAdLoad(bannerAd: TTBannerAd?) {
                 if (bannerAd == null) {
                     callbackBannerFailed(adProviderType, alias, listener, "请求成功，但是返回的 bannerAd 为空")

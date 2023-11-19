@@ -23,7 +23,7 @@ class App : ActLifecycleAppBase() {
 //        // 可选参数，设置主题类型，0：正常模式；1：夜间模式；默认为0；传非法值，按照0处理
 //        TogetherAdCsj.themeStatus = 1
 //        // 可选参数，同上，区别在于这个随时可以调用
-//        TogetherAdCsj.mTTAdManager.themeStatus = 1
+//        TTAdSdk.getAdManager().themeStatus = 1
 //        // 可选参数，需在初始化之前，标题栏的主题色
 //        TogetherAdCsj.titleBarTheme = TTAdConstant.TITLE_BAR_THEME_DARK
 //        // 可选参数，需在初始化之前，是否允许sdk展示通知栏提示

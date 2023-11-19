@@ -51,7 +51,7 @@ object TogetherAdCsj {
     var data: String? = null
 
     // 可选参数，需在初始化之前，可以设置隐私信息控制开关
-    var customController: TTCustomController? = null
+//    var customController: TTCustomController? = null
 
     // 可选参数，异步初始化回调
     var initCallback: TTAdSdk.InitCallback? = null
@@ -64,8 +64,8 @@ object TogetherAdCsj {
     var downloadType = -1
 
 
-    //全局使用的 TTAdManager
-    val mTTAdManager = TTAdSdk.getAdManager()
+//    //全局使用的 TTAdManager
+//    var mTTAdManager = null
 
     /**
      * 简单初始化
@@ -142,11 +142,61 @@ object TogetherAdCsj {
         if (pluginUpdateConfig != -1) {
             ttAdConfig.setPluginUpdateConfig(pluginUpdateConfig)
         }
-        customController?.let { ttAdConfig.customController(it) }
+        ttAdConfig.customController(object : TTCustomController() {
+            override fun isCanUseLocation(): Boolean {
+                return false
+            }
+
+            override fun getTTLocation(): LocationProvider {
+                return super.getTTLocation()
+            }
+
+            override fun alist(): Boolean {
+                return false
+            }
+
+            override fun isCanUsePhoneState(): Boolean {
+                return super.isCanUsePhoneState()
+            }
+
+            override fun getDevImei(): String {
+                return super.getDevImei()
+            }
+
+            override fun isCanUseWifiState(): Boolean {
+                return super.isCanUseWifiState()
+            }
+
+            override fun getMacAddress(): String {
+                return super.getMacAddress()
+            }
+
+            override fun isCanUseWriteExternal(): Boolean {
+                return super.isCanUseWriteExternal()
+            }
+
+            override fun getDevOaid(): String {
+                return super.getDevOaid()
+            }
+
+            override fun isCanUseAndroidId(): Boolean {
+                return super.isCanUseAndroidId()
+            }
+
+            override fun getAndroidId(): String {
+                return super.getAndroidId()
+            }
+
+            override fun isCanUsePermissionRecordAudio(): Boolean {
+                return super.isCanUsePermissionRecordAudio()
+            }
+        })
+//        customController?.let { ttAdConfig.customController(it) }
         //初始化
         TTAdSdk.init(context, ttAdConfig.build())
-        TTAdSdk.start(object : TTAdSdk.Callback {
+        TTAdSdk.start(object : Callback {
             override fun success() {
+                "TTAdSdk.start success".logi()
                 initCallback?.success()
             }
 
@@ -156,6 +206,6 @@ object TogetherAdCsj {
             }
         })
 
-        "csj 初始化完毕".logi()
+        "csj 代码初始化完毕，结果是${TTAdSdk.isInitSuccess()}".logi()
     }
 }
