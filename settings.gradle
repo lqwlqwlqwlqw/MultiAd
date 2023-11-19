@@ -14,7 +14,8 @@ pluginManagement {
     }
 }
 
-include ':core'
-include ':gdt'
-include ':csj'
+//include ':core'
+//include ':gdt'
+//include ':csj'
+include ':gromore'
 include ':demo'

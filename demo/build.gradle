@@ -72,9 +72,10 @@ dependencies {
     //内存泄漏检测工具
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
 
+    api project(':gromore')
     //TogetherAd
-    implementation project(':csj')
-    implementation project(':gdt')
+//    implementation project(':csj')
+//    implementation project(':gdt')
 
 //    //核心库（ 必要 ）
 //    implementation 'com.github.ifmvo.TogetherAd:core:5.1.8'
