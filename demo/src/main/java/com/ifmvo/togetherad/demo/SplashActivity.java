@@ -1,6 +1,10 @@
 package com.ifmvo.togetherad.demo;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 
@@ -12,9 +16,26 @@ import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.bytedance.sdk.openadsdk.mediation.manager.MediationAdEcpmInfo;
 import com.bytedance.sdk.openadsdk.mediation.manager.MediationBaseManager;
 
+import java.util.HashMap;
+
 public class SplashActivity extends Activity {
 
 
+    private FrameLayout mAdContainer;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        //隐藏状态栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_launcher_layout);
+
+        mAdContainer = findViewById(R.id.root_container);
+
+        loadSplashAd(this);
+    }
 
     //构造开屏广告的Adslot
     private AdSlot buildSplashAdslot() {
@@ -41,7 +62,7 @@ public class SplashActivity extends Activity {
             @Override
             public void onSplashRenderSuccess(CSJSplashAd csjSplashAd) {
                 //广告渲染成功，在此展示广告
-//                showSplashAd(csjSplashAd, splashContainer); //注 ：splashContainer为展示Banner广告的容器
+                showSplashAd(csjSplashAd, mAdContainer); //注 ：splashContainer为展示Banner广告的容器
             }
 
             @Override
