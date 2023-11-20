@@ -1,8 +1,11 @@
 package com.ifmvo.togetherad.demo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -20,8 +23,10 @@ import java.util.HashMap;
 
 public class SplashActivity extends Activity {
 
-
+    public static final String TAG = "TT-SplashActivity";
     private FrameLayout mAdContainer;
+
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +35,18 @@ public class SplashActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
+        context = this;
+
         setContentView(R.layout.activity_launcher_layout);
 
         mAdContainer = findViewById(R.id.root_container);
 
-        loadSplashAd(this);
+        (new Handler()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadSplashAd((Activity) context);
+            }
+        },3000);
     }
 
     //构造开屏广告的Adslot
@@ -47,6 +59,7 @@ public class SplashActivity extends Activity {
 
     // 加载开屏广告
     private void loadSplashAd(Activity act) {
+        Log.d(TAG, "loadSplashAd start");
         TTAdNative adNativeLoader = TTAdSdk.getAdManager().createAdNative(act);
         adNativeLoader.loadSplashAd(buildSplashAdslot(), new TTAdNative.CSJSplashAdListener() {
             @Override

@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
-import com.lqw.gromore.GroMoreManager;
+import com.ifmvo.togetherad.GroMoreManager;
 
 public class MainApplication extends Application {
 

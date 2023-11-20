@@ -1,14 +1,17 @@
-package com.lqw.gromore;
+package com.ifmvo.togetherad;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.bytedance.sdk.openadsdk.TTCustomController;
 import com.bytedance.sdk.openadsdk.mediation.init.MediationPrivacyConfig;
 
+import java.util.logging.Logger;
+
 public class GroMoreManager {
-    public static final String TAG = "GroMoreManager";
+    public static final String TAG = "TT-GroMoreManager";
 
     private static volatile GroMoreManager sInstance;
 
@@ -31,17 +34,21 @@ public class GroMoreManager {
 
     //初始化聚合sdk
     private void initMediationAdSdk(Context context) {
+        Log.d(TAG, "TTAdsdk init start");
         TTAdSdk.init(context, buildConfig(context));
         TTAdSdk.start(new TTAdSdk.Callback() {
             @Override
             public void success() {
                 //初始化成功
                 //在初始化成功回调之后进行广告加载
+                Log.d(TAG, "TTAdsdk init success");
             }
 
             @Override
             public void fail(int i, String s) {
                 //初始化失败
+                Log.d(TAG, "TTAdsdk init fail" + i
+                        + " msg:" + s);
             }
         });
     }
