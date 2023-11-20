@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'mediation-auto-adapter'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -72,7 +73,10 @@ dependencies {
     //内存泄漏检测工具
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
 
-    api project(':gromore')
+    implementation project(':gromore')
+
+    implementation 'com.pangle.cn:mediation-sdk:5.7.0.5' //穿山甲融合SDK
+    implementation files('../gromore/libs/GDTSDK.unionNormal.4.542.1412.aar')
     //TogetherAd
 //    implementation project(':csj')
 //    implementation project(':gdt')
@@ -90,4 +94,14 @@ dependencies {
 //    //百度百青藤 （ 可选 ）
 //    implementation 'com.github.ifmvo.TogetherAd:baidu:5.1.8'
 
+}
+
+mediationAutoAdapter {
+    //自动适配adn 所有adn adapter，默认值为true，如果为false脚本功能全部关闭
+    autoUpdate true
+    //如果不想全部自动适配，可选择此项，默认值为空[]，可以不填写
+    //如果autoUpdate设置成false，此项不生效，不会自动适配adn adapter
+    //如果autoUpdate设置成true，autoUpdateAdn配置了adn，则生效配置的adn。
+    //autoUpdateAdn没有配置adn，自动适配所有的adn
+    autoUpdateAdn = ["gdt"]
 }

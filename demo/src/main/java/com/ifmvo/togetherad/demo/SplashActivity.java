@@ -1,15 +1,20 @@
 package com.ifmvo.togetherad.demo;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.app.Activity;
+import android.widget.FrameLayout;
 
-public class SplashActivity extends AppCompatActivity {
-    public SplashActivity() {
-        super();
-    }
 
-    public SplashActivity(int contentLayoutId) {
-        super(contentLayoutId);
-    }
+import com.bytedance.sdk.openadsdk.AdSlot;
+import com.bytedance.sdk.openadsdk.CSJAdError;
+import com.bytedance.sdk.openadsdk.CSJSplashAd;
+import com.bytedance.sdk.openadsdk.TTAdNative;
+import com.bytedance.sdk.openadsdk.TTAdSdk;
+import com.bytedance.sdk.openadsdk.mediation.manager.MediationAdEcpmInfo;
+import com.bytedance.sdk.openadsdk.mediation.manager.MediationBaseManager;
+
+public class SplashActivity extends Activity {
+
+
 
     //构造开屏广告的Adslot
     private AdSlot buildSplashAdslot() {
@@ -24,8 +29,8 @@ public class SplashActivity extends AppCompatActivity {
         TTAdNative adNativeLoader = TTAdSdk.getAdManager().createAdNative(act);
         adNativeLoader.loadSplashAd(buildSplashAdslot(), new TTAdNative.CSJSplashAdListener() {
             @Override
-            public void onSplashLoadSuccess() {
-                //广告加载成功
+            public void onSplashLoadSuccess(CSJSplashAd csjSplashAd) {
+
             }
 
             @Override
@@ -36,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSplashRenderSuccess(CSJSplashAd csjSplashAd) {
                 //广告渲染成功，在此展示广告
-                showSplashAd(csjSplashAd, splashContainer); //注 ：splashContainer为展示Banner广告的容器
+//                showSplashAd(csjSplashAd, splashContainer); //注 ：splashContainer为展示Banner广告的容器
             }
 
             @Override

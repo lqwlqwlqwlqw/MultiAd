@@ -7,7 +7,28 @@ import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.bytedance.sdk.openadsdk.TTCustomController;
 import com.bytedance.sdk.openadsdk.mediation.init.MediationPrivacyConfig;
 
-public class GroMoreMain {
+public class GroMoreManager {
+    public static final String TAG = "GroMoreManager";
+
+    private static volatile GroMoreManager sInstance;
+
+
+    public static GroMoreManager getInstance(Context context) {
+        if (sInstance == null) {
+            synchronized (GroMoreManager.class) {
+                if (sInstance == null) {
+                    sInstance = new GroMoreManager(context);
+                }
+            }
+        }
+        return sInstance;
+    }
+
+    public GroMoreManager(Context context) {
+        super();
+        initMediationAdSdk(context);
+    }
+
     //初始化聚合sdk
     private void initMediationAdSdk(Context context) {
         TTAdSdk.init(context, buildConfig(context));
@@ -41,6 +62,7 @@ public class GroMoreMain {
                 .customController(getTTCustomController())  //设置隐私权
                 .build();
     }
+
     //设置隐私合规
     private TTCustomController getTTCustomController() {
         return new TTCustomController() {
